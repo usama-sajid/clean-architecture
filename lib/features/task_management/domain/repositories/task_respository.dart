@@ -1,8 +1,10 @@
-import 'package:innovage/features/task_management/domain/models/task_model.dart';
+import 'package:dartz/dartz.dart';
+import 'package:innovage/features/task_management/domain/failures/failures.dart';
+import '../entities/task_entity.dart';
 
 abstract class TaskRepository {
-  Future<List<TaskModel>> getAllTasks();
-  Future<void> addTask(TaskModel task);
-  Future<void> editTask(TaskModel task, String id);
-  Future<void> deleteTask(String id);
+  Future<Either<Failure, List<TaskEntity>>> getAllTasks();
+  Future<Either<Failure, void>> addTask(TaskEntity task);
+  Future<Either<Failure, void>> editTask(TaskEntity task, String id);
+  Future<Either<Failure, void>> deleteTask(String id);
 }
