@@ -1,25 +1,60 @@
 import 'package:equatable/equatable.dart';
-import 'package:innovage/features/task_management/domain/models/task_model.dart';
+
+import '../../data/models/task_model.dart';
 
 abstract class TasksState extends Equatable {}
 
-class LoadingState extends TasksState {
+class TasksInitial extends TasksState {
   @override
   List<Object> get props => [];
 }
 
-class LoadedState extends TasksState {
+class TasksLoading extends TasksState {
+  @override
+  List<Object> get props => [];
+}
+
+class TasksLoaded extends TasksState {
   final List<TaskModel> tasks;
-  LoadedState(this.tasks);
+  
+  TasksLoaded(this.tasks);
 
   @override
   List<Object> get props => [tasks];
 }
 
-class TaskAdded extends TasksState {
-  final TaskModel tasks;
-  TaskAdded(this.tasks);
+class TasksError extends TasksState {
+  final String message;
+  
+  TasksError(this.message);
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [message];
+}
+
+class TaskAdded extends TasksState {
+  final TaskModel task;
+  
+  TaskAdded(this.task);
+
+  @override
+  List<Object> get props => [task];
+}
+
+class TaskUpdated extends TasksState {
+  final TaskModel task;
+  
+  TaskUpdated(this.task);
+
+  @override
+  List<Object> get props => [task];
+}
+
+class TaskDeleted extends TasksState {
+  final String taskId;
+  
+  TaskDeleted(this.taskId);
+
+  @override
+  List<Object> get props => [taskId];
 }
