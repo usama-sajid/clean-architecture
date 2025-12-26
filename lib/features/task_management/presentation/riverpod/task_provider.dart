@@ -5,8 +5,8 @@ import 'package:innovage/features/task_management/domain/usecases/edit_task.dart
 import 'package:innovage/features/task_management/domain/usecases/get_all_tasks.dart';
 import 'package:innovage/features/task_management/presentation/riverpod/dependency_injection.dart';
 import 'package:innovage/features/task_management/presentation/riverpod/task_states.dart';
+import '../../domain/entities/task_entity.dart';
 
-import '../../data/models/task_model.dart';
 
 class TaskNotifier extends Notifier<TasksState> {
   late GetAllTasksUseCase _getAllTasksUseCase;
@@ -14,7 +14,7 @@ class TaskNotifier extends Notifier<TasksState> {
   late EditTaskUseCase _editTaskUseCase;
   late DeleteTaskUseCase _deleteTaskUseCase;
 
-  List<TaskModel> _tasks = [];
+  List<TaskEntity> _tasks = [];
 
   @override
   TasksState build() {
@@ -42,7 +42,7 @@ class TaskNotifier extends Notifier<TasksState> {
     );
   }
 
-  Future<void> addTask(TaskModel task) async {
+  Future<void> addTask(TaskEntity task) async {
     state = TasksLoading();
     
     final result = await _addTaskUseCase(AddTaskParams(task: task));
@@ -58,7 +58,7 @@ class TaskNotifier extends Notifier<TasksState> {
     );
   }
 
-  Future<void> editTask(TaskModel task, String oldId) async {
+  Future<void> editTask(TaskEntity task, String oldId) async {
     state = TasksLoading();
     
     final result = await _editTaskUseCase(

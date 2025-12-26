@@ -2,7 +2,7 @@ import 'dart:convert';
 
 /// Data Transfer Object for Task
 /// This handles JSON serialization/deserialization for the data layer
-class TaskModel {
+class TaskModel{
   final String id;
   final String name;
   final String date;
@@ -11,8 +11,7 @@ class TaskModel {
     required this.id,
     required this.name,
     required this.date,
-  });
-
+  }) ;
   factory TaskModel.fromJson(Map<String, dynamic> json) => TaskModel(
         id: json["id"],
         name: json["name"],

@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:innovage/features/task_management/data/datasources/local_task_data_source.dart';
+import 'package:innovage/features/task_management/data/mappers/task_entity_to_model_mapper.dart';
+import 'package:innovage/features/task_management/domain/entities/task_entity.dart';
 import 'package:innovage/features/task_management/domain/failures/failures.dart';
 import 'package:innovage/features/task_management/domain/repositories/task_respository.dart';
-
-import '../models/task_model.dart';
 
 /// Implementation of TaskRepository using local data source
 class TaskRepositoryImpl implements TaskRepository {
@@ -12,9 +12,9 @@ class TaskRepositoryImpl implements TaskRepository {
   TaskRepositoryImpl({required this.localDataSource});
 
   @override
-  Future<Either<Failure, void>> addTask(TaskModel task) async {
+  Future<Either<Failure, void>> addTask(TaskEntity task) async {
     try {
-      await localDataSource.addTask(task);
+      await localDataSource.addTask(TaskMapper.toModel(task));
       return const Right(null);
     } catch (e) {
       return Left(DatabaseFailure('Failed to add task: ${e.toString()}'));
@@ -32,9 +32,9 @@ class TaskRepositoryImpl implements TaskRepository {
   }
 
   @override
-  Future<Either<Failure, void>> editTask(TaskModel task, String id) async {
+  Future<Either<Failure, void>> editTask(TaskEntity task, String id) async {
     try {
-      await localDataSource.editTask(task, id);
+      await localDataSource.editTask(TaskMapper.toModel(task), id);
       return const Right(null);
     } catch (e) {
       return Left(DatabaseFailure('Failed to edit task: ${e.toString()}'));
@@ -42,10 +42,10 @@ class TaskRepositoryImpl implements TaskRepository {
   }
 
   @override
-  Future<Either<Failure, List<TaskModel>>> getAllTasks() async {
+  Future<Either<Failure, List<TaskEntity>>> getAllTasks() async {
     try {
       final tasks = await localDataSource.getAllTasks();
-      return Right(tasks);
+      return Right(tasks.map(TaskMapper.toEntity).toList());
     } catch (e) {
       return Left(DatabaseFailure('Failed to get tasks: ${e.toString()}'));
     }

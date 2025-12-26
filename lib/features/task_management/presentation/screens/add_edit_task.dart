@@ -4,7 +4,8 @@ import 'package:innovage/features/task_management/presentation/riverpod/task_pro
 import 'package:innovage/features/task_management/presentation/riverpod/task_states.dart';
 import 'package:innovage/features/task_management/utils/constants/app_strings.dart';
 
-import '../../data/models/task_model.dart';
+import '../../domain/entities/task_entity.dart';
+
 
 class AddEditTask extends StatefulWidget {
   const AddEditTask({super.key});
@@ -17,12 +18,12 @@ class _AddEditTaskState extends State<AddEditTask> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _idController = TextEditingController();
   final TextEditingController _dateController = TextEditingController();
-  TaskModel? _arguments;
+  TaskEntity? _arguments;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    final newArguments = ModalRoute.of(context)?.settings.arguments as TaskModel?;
+    final newArguments = ModalRoute.of(context)?.settings.arguments as TaskEntity?;
     if (newArguments != _arguments) {
       _arguments = newArguments;
       _nameController.text = _arguments?.name ?? '';
@@ -115,13 +116,13 @@ class _AddEditTaskState extends State<AddEditTask> {
                         onPressed: () async {
                           if (arguments == null) {
                             ref.read(taskNotifierProvider.notifier).addTask(
-                                TaskModel(
+                                TaskEntity(
                                     id: _idController.text,
                                     name: _nameController.text,
                                     date: _dateController.text));
                           } else {
                             ref.read(taskNotifierProvider.notifier).editTask(
-                                TaskModel(
+                                TaskEntity(
                                   id: _idController.text,
                                   name: _nameController.text,
                                   date: _dateController.text,

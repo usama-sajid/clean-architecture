@@ -1,10 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
+import 'package:innovage/features/task_management/domain/entities/task_entity.dart';
 import 'package:innovage/features/task_management/domain/failures/failures.dart';
 import 'package:innovage/features/task_management/domain/repositories/task_respository.dart';
 import 'package:innovage/features/task_management/domain/usecases/usecase.dart';
-
-import '../../data/models/task_model.dart';
 
 class AddTaskUseCase implements UseCase<void, AddTaskParams> {
   final TaskRepository repository;
@@ -18,7 +17,7 @@ class AddTaskUseCase implements UseCase<void, AddTaskParams> {
 }
 
 class AddTaskParams extends Equatable {
-  final TaskModel task;
+  final TaskEntity task;
 
   const AddTaskParams({required this.task});
 

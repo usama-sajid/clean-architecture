@@ -2,23 +2,23 @@ import 'package:equatable/equatable.dart';
 
 /// Domain entity for Task
 /// This is pure business logic and doesn't depend on any external frameworks
-class Task extends Equatable {
+class TaskEntity extends Equatable {
   final String id;
   final String name;
   final String date;
 
-  const Task({
+  const TaskEntity({
     required this.id,
     required this.name,
     required this.date,
   });
 
-  Task copyWith({
+  TaskEntity copyWith({
     String? id,
     String? name,
     String? date,
   }) {
-    return Task(
+    return TaskEntity(
       id: id ?? this.id,
       name: name ?? this.name,
       date: date ?? this.date,

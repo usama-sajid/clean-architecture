@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
-
-import '../../data/models/task_model.dart';
+import '../../domain/entities/task_entity.dart';
 
 abstract class TasksState extends Equatable {}
 
@@ -15,7 +14,7 @@ class TasksLoading extends TasksState {
 }
 
 class TasksLoaded extends TasksState {
-  final List<TaskModel> tasks;
+  final List<TaskEntity> tasks;
   
   TasksLoaded(this.tasks);
 
@@ -33,7 +32,7 @@ class TasksError extends TasksState {
 }
 
 class TaskAdded extends TasksState {
-  final TaskModel task;
+  final TaskEntity task;
   
   TaskAdded(this.task);
 
@@ -42,7 +41,7 @@ class TaskAdded extends TasksState {
 }
 
 class TaskUpdated extends TasksState {
-  final TaskModel task;
+  final TaskEntity task;
   
   TaskUpdated(this.task);
 

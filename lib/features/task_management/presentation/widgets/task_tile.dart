@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:innovage/features/task_management/presentation/riverpod/task_provider.dart';
 
-import '../../data/models/task_model.dart';
+import '../../domain/entities/task_entity.dart';
 import '../../utils/constants/routes.dart';
 
 class TaskTile extends ConsumerWidget {
   const TaskTile({required this.task, super.key});
-  final TaskModel task;
+  final TaskEntity task;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
